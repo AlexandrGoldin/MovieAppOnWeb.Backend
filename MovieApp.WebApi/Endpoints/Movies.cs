@@ -1,6 +1,5 @@
 ﻿using Carter;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using MovieApp.Infrastructure.Features.Movies.Commands.CreateMovie;
 using MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie;
 using MovieApp.Infrastructure.Features.Movies.Commands.UpdateMovie;
@@ -48,11 +47,11 @@ namespace MovieApp.WebApi.Endpoints
                 return Results.Ok(movieResponse.MovieId);
             });
 
-            app.MapDelete("/api/movies/{id}", async (DeleteMovieCommand command, ISender sender) =>
+            app.MapDelete("/api/movies/{id}", async (int id, ISender sender) =>
             {
-                var movieResponse = await sender.Send(command);
-                return Results.Ok(movieResponse.MovieId);
-                //return Results.NoContent();   
+                await sender.Send(new DeleteMovieCommand(id));
+
+                return Results.NoContent();   
             });
         }
     }

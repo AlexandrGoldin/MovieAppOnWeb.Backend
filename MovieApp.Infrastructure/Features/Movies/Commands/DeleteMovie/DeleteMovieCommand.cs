@@ -2,7 +2,6 @@
 
 namespace MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie
 {
-    public record DeleteMovieCommand(int Id) 
-        : IRequest<MovieCommandResponse>;
-   
+    public record DeleteMovieCommand(int Id) : IRequest;
+
 }

@@ -1,14 +1,13 @@
 ﻿using Ardalis.GuardClauses;
-using Azure.Core;
 using MediatR;
 using MovieApp.Infrastructure.Entities;
-using MovieApp.Infrastructure.Features.Movies.Commands;
+using MovieApp.Infrastructure.Exceptions;
 using MovieApp.Infrastructure.Interfaces;
 
 namespace MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie
 {
     internal sealed class DeleteMovieCommandHandler
-        : IRequestHandler<DeleteMovieCommand, MovieCommandResponse>
+        : IRequestHandler<DeleteMovieCommand>
     {
         private readonly IRepository<Movie> _movieRepository;
 
@@ -18,19 +17,20 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie
             _movieRepository = movieRepository;
         }
 
-        public async Task<MovieCommandResponse> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
         {
+            if (request.Id > 0 && request.Id < 23 )
+            {
+                throw new DuplicateException($"Existing movie with Id: {request.Id} is not available for deletion");
+            }
             var movieDelete = await _movieRepository.GetByIdAsync(request.Id);
 
-            ////return StatusCode 500???. Need replace StatusCode on 404!!!
             if (movieDelete is null)
                 throw new NotFoundException(nameof(movieDelete), request.Id.ToString());
 
             await _movieRepository.DeleteAsync(movieDelete, cancellationToken);
-
-            return new MovieCommandResponse(request.Id);
         }
     }
 }
 
-// return new MovieCommandResponse(request.Id);
+  

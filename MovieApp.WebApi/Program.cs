@@ -4,6 +4,7 @@ using MovieApp.Infrastructure;
 using MovieApp.Infrastructure.Data;
 using MovieApp.Infrastructure.Interfaces;
 using MovieApp.Infrastructure.Services;
+using MovieApp.WebApi.Middleware;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,6 +61,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
 app.MapCarter();
 app.UseStaticFiles();
@@ -69,7 +71,6 @@ app.UseHttpsRedirection();
 
 app.UseCors(builder => builder.WithOrigins("http://localhost:3000")
                             .AllowAnyHeader()
-
                             .AllowAnyMethod());
 app.Run();
 

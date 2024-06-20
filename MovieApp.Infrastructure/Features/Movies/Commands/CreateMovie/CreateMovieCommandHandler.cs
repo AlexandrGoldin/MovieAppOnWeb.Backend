@@ -48,7 +48,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.CreateMovie
 
             if (existingMovies.Any(movie => movie.Title == request.Title))
             {
-                throw new DuplicateException($"A catalogItem with name {request.Title} already exists");
+                throw new DuplicateException($"A movie with name {request.Title} already exists");
             }
 
             if (!existingMovies.Any(movie => movie.PictureUri == request.PictureUri))
