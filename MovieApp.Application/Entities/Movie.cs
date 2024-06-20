@@ -39,12 +39,14 @@ namespace MovieApp.Infrastructure.Entities
             Guard.Against.NullOrEmpty(details.Title, nameof(details.Title));
             Guard.Against.NullOrEmpty(details.Overview, nameof(details.Overview));
             Guard.Against.NullOrEmpty(details.Description, nameof(details.Description));
+            Guard.Against.NullOrEmpty(details.Audience, nameof(details.Audience));
             Guard.Against.NegativeOrZero(details.Rating, nameof(details.Rating));
 
             Title = details.Title;
             Overview = details.Overview;
             Description = details.Description;
-            Rating= details.Rating;
+            Audience = details.Audience;
+            Rating = details.Rating;
         }
 
         public void UpdateCountry(int countryId)
@@ -70,14 +72,14 @@ namespace MovieApp.Infrastructure.Entities
             ReleaseDate = releaseDate;
         }
 
-        public void UpdatePictureUri(string pictureName)
+        public void UpdatePictureUri(string pictureUri)
         {
-            if(string.IsNullOrEmpty(pictureName))
+            if(string.IsNullOrEmpty(pictureUri))
             {
                 PictureUri = string.Empty;
                 return;
             }
-            PictureUri = $"images\\products\\{pictureName}";
+            PictureUri = pictureUri;
         }
 
         public readonly record struct MovieDetails
@@ -85,7 +87,18 @@ namespace MovieApp.Infrastructure.Entities
             public string? Title {get;}
             public string? Overview {get;}
             public string? Description { get; }
+            public string? Audience { get; }
             public decimal Rating { get;}
+
+            public MovieDetails(string? title, string? overview, 
+                string? description, string? audience, decimal rating)
+            {
+                Title = title;
+                Overview = overview;
+                Description = description;
+                Audience = audience;
+                Rating = rating;
+            }
         }          
     }
 } 

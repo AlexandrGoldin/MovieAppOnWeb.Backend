@@ -1,8 +1,8 @@
 ﻿namespace MovieApp.Infrastructure.Common.Exceptions
 {
-    internal class NotFoundException : Exception
+    internal class CastomeNotFoundException : Exception
     {
-        public NotFoundException(string name, int? Id)
+        public CastomeNotFoundException(string name, int? Id)
        : base($"Object: {name} = {Id} not found.") { }
 
         //public NotFoundException(string name, object key)

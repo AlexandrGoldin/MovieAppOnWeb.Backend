@@ -1,4 +1,5 @@
 using Carter;
+using Microsoft.OpenApi.Models;
 using MovieApp.Infrastructure;
 using MovieApp.Infrastructure.Data;
 using MovieApp.Infrastructure.Interfaces;
@@ -8,7 +9,15 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options => {
+    options.MapType<DateOnly>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "date"
+    });
+});
 
 builder.Services.AddCarter();
 
@@ -58,10 +67,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseHttpsRedirection();
 
-
 app.UseCors(builder => builder.WithOrigins("http://localhost:3000")
                             .AllowAnyHeader()
-                            .AllowAnyMethod());
 
+                            .AllowAnyMethod());
 app.Run();
 

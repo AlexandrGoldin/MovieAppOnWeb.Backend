@@ -14,3 +14,4 @@ namespace MovieApp.Infrastructure.Specifications
         }
     }
 }
+

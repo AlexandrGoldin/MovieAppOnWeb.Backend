@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MovieApp.Infrastructure;
-using MovieApp.Infrastructure.Interfaces;
-using MovieApp.Infrastructure.Services;
+using MovieApp.Infrastructure.Common.Behaviors;
 using MovieApp.Infrastructure.Data;
-using FluentValidation;
+using MovieApp.Infrastructure.Interfaces;
+using System.Reflection;
 
 namespace MovieApp.Infrastructure
 {
@@ -18,10 +19,12 @@ namespace MovieApp.Infrastructure
 
             services.AddMediatR(configuration =>
                  configuration.RegisterServicesFromAssembly(assembly));
+            services.AddValidatorsFromAssemblies(new[] {Assembly.GetExecutingAssembly()});
+
+            services.AddTransient(typeof(IPipelineBehavior<,>),
+                typeof(ValidationBehavior<,>));
 
             services.AddValidatorsFromAssembly(assembly);
-
-           // return services;
 
             string? connection = configuration.GetConnectionString("DefaultConnection");
 
@@ -31,10 +34,6 @@ namespace MovieApp.Infrastructure
             services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             
-            //var catalogSettings = configuration.Get<CatalogSettings>() ?? new CatalogSettings();
-            //services.AddSingleton<IUriComposer>(new UriComposer(catalogSettings));
-
-
             return services;
         }
     }

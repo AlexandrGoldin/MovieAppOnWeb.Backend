@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MovieApp.Infrastructure.Movies.Queries.GetMovieDetails;
+using MovieApp.Infrastructure.Features.Movies.Queries;
 
 namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
 {
@@ -8,6 +8,6 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
     string? SortColumn,
     string? SortOrder,
     int Page,
-    int PageSize) : IRequest<PagedList<MovieResponse>>;
+    int PageSize) : IRequest<PagedList<GetMovieGetByIdResponse>>;
 
 }
