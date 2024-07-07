@@ -1,5 +1,8 @@
 ﻿using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using MovieApp.ApplicationCore.Constants;
 using MovieApp.Infrastructure.Features.Movies.Commands.CreateMovie;
 using MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie;
 using MovieApp.Infrastructure.Features.Movies.Commands.UpdateMovie;
@@ -28,17 +31,21 @@ namespace MovieApp.WebApi.Endpoints
             });
 
             app.MapGet("/api/movies/{id}",
+                [Authorize]
                 async (int id, ISender sender) =>
                 {
                     return Results.Ok(await sender.Send(new GetMovieDetailsQuery(id)));
                 });
 
-            app.MapPost("/api/movies", async(CreateMovieCommand comand, ISender sender) =>
+            app.MapPost("/api/movies",
+                [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+            async (CreateMovieCommand comand, ISender sender) =>
             {
                 var movieResponse = await sender.Send(comand);
 
                 return Results.Ok(movieResponse.MovieId);
-            });
+            })
+              .DisableAntiforgery(); 
 
             app.MapPut("/api/movies/{id}", async (UpdateMovieCommand comand, ISender sender) =>
             {
@@ -47,12 +54,17 @@ namespace MovieApp.WebApi.Endpoints
                 return Results.Ok(movieResponse.MovieId);
             });
 
-            app.MapDelete("/api/movies/{id}", async (int id, ISender sender) =>
+            app.MapDelete("/api/movies/{id}",
+                 [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+            async (int id, ISender sender) =>
             {
                 await sender.Send(new DeleteMovieCommand(id));
 
                 return Results.NoContent();   
             });
+            //.RequireAuthorization();
+            //.WithName("GetWeatherForecast")
+            //.WithOpenApi(); 
         }
     }
 

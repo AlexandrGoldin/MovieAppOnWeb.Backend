@@ -7,6 +7,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.UpdateMovie
        string? Title,
        string? Overview,
        string? Description,
+       decimal Price,
        string? PictureUri,
        string? Audience,
        decimal Rating,

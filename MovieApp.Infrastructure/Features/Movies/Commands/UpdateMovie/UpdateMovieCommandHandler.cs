@@ -34,7 +34,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.UpdateMovie
             }
 
             Movie.MovieDetails details = new(request.Title, request.Overview,
-                request.Description, request.Audience, request.Rating);
+                request.Description,request.Price, request.Audience, request.Rating);
                 existingMovie.UpdateDetails(details);
                 existingMovie.UpdateCountry(request.CountryId);
                 existingMovie.UpdateGenre(request.GenreId);

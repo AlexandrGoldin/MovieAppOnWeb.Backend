@@ -3,9 +3,12 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Common.Behaviors;
 using MovieApp.Infrastructure.Data;
 using MovieApp.Infrastructure.Interfaces;
+using MovieApp.Infrastructure.Logging;
+using MovieApp.Infrastructure.Services;
 using System.Reflection;
 
 namespace MovieApp.Infrastructure
@@ -33,7 +36,12 @@ namespace MovieApp.Infrastructure
 
             services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            
+
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddHttpContextAccessor();
+
             return services;
         }
     }

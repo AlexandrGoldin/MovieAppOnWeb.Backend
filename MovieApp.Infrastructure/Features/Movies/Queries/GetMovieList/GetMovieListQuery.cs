@@ -8,6 +8,6 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
     string? SortColumn,
     string? SortOrder,
     int Page,
-    int PageSize) : IRequest<PagedList<GetMovieGetByIdResponse>>;
+    int PageSize) : IRequest<PagedList<MovieQueryResponse>>;
 
 }

@@ -1,12 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MovieApp.ApplicationCore.Entities;
 using MovieApp.Infrastructure.Entities;
+using MovieApp.Infrastructure.Identity;
 using System.Reflection;
 
 namespace MovieApp.Infrastructure.Data
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<ApplicationUser>
+    //public class ApplicationContext : DbContext
     {
 #pragma warning disable CS8618 // Required by Entity Framework
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Genre> Genres { get; set; }

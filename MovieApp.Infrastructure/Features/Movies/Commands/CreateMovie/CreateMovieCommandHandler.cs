@@ -29,6 +29,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.CreateMovie
             request.Title,
             request.Overview,
             request.Description,
+            request.Price,
             _uriComposer.ComposePicUri(request.PictureUri!),
             request.Audience,
             request.Rating,

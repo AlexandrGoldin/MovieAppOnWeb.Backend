@@ -6,6 +6,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.UpdateMovie
     {
         public UpdateMovieCommandValidator() 
         {
+            // 22 Movies are not editailable
             RuleFor(x => x.Id).GreaterThan(22)
                 .WithMessage("The movie is not editable");
             RuleFor(x => x.Title)

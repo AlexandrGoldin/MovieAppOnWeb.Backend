@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
 {
     internal sealed class GetMovieListQueryHandler :
-        IRequestHandler<GetMovieListQuery, PagedList<GetMovieGetByIdResponse>>
+        IRequestHandler<GetMovieListQuery, PagedList<MovieQueryResponse>>
     {
         private readonly IUriComposer _uriComposer;
         private readonly IReadRepository<Movie> _movieRepository;
@@ -20,7 +20,7 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
             _movieRepository = movieRepository;
         }
 
-        public async Task<PagedList<GetMovieGetByIdResponse>> Handle(GetMovieListQuery request,
+        public async Task<PagedList<MovieQueryResponse>> Handle(GetMovieListQuery request,
             CancellationToken cancellationToken)
         {
             await Task.Delay(1000);
@@ -42,19 +42,20 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
             }
 
             var movieResponses = movieList!
-                .Select(m => new GetMovieGetByIdResponse(
-                    m.Id,
-                    m.Title!,
-                    m.Overview!,
-                    m.Description!,
-                    _uriComposer.ComposePicUri(m.PictureUri!),
-                    m.Audience!,
-                    m.Rating,
-                    m.ReleaseDate,
-                    m.Country!.CountryName,
-                    m.Genre!.GenreName));
+                .Select(m => new MovieQueryResponse {
+                    MovieId = m.Id,
+                    Title = m.Title!,
+                    Overview = m.Overview!,
+                    Description = m.Description!,
+                    Price =  m.Price,
+                    PictureUri = _uriComposer.ComposePicUri(m.PictureUri!),
+                    Audience = m.Audience!,
+                    Rating = m.Rating,
+                    ReleaseDate = m.ReleaseDate,
+                    CountryName = m.Country!.CountryName,
+                    GenreName = m.Genre!.GenreName});
            
-            var movies = PagedList<GetMovieGetByIdResponse>.CreateAsync(
+            var movies = PagedList<MovieQueryResponse>.CreateAsync(
                 movieResponses.ToList(),
                 request.Page,
                 request.PageSize);

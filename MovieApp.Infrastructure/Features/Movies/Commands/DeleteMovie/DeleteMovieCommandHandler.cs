@@ -19,6 +19,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie
 
         public async Task Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
         {
+            //22 Movies are not available for deletion
             if (request.Id > 0 && request.Id < 23 )
             {
                 throw new DuplicateException($"Existing movie with Id: {request.Id} is not available for deletion");

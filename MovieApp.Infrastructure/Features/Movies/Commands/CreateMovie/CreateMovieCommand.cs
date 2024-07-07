@@ -6,6 +6,7 @@ namespace MovieApp.Infrastructure.Features.Movies.Commands.CreateMovie
         string? Title,
         string? Overview,
         string? Description,
+        decimal Price,
         string? PictureUri,
         string? Audience,
         decimal Rating,
