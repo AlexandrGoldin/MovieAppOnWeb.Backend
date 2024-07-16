@@ -1,6 +1,5 @@
 ﻿using Ardalis.GuardClauses;
 using MediatR;
-using MovieApp.Infrastructure.Common.Exceptions;
 using MovieApp.Infrastructure.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 using MovieApp.Infrastructure.Interfaces;

@@ -1,6 +1,7 @@
 using Carter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinimalApi.Endpoint.Extensions;
@@ -150,7 +151,8 @@ app.UseRouting();
 
 app.UseCors(builder => builder.WithOrigins("http://localhost:3000")
                             .AllowAnyHeader()
-                            .AllowAnyMethod());
+                            .AllowAnyMethod()
+                            .AllowCredentials());
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

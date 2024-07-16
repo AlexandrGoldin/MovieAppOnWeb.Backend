@@ -61,10 +61,8 @@ namespace MovieApp.WebApi.Endpoints
                 await sender.Send(new DeleteMovieCommand(id));
 
                 return Results.NoContent();   
-            });
-            //.RequireAuthorization();
-            //.WithName("GetWeatherForecast")
-            //.WithOpenApi(); 
+            })
+            .WithOpenApi();
         }
     }
 

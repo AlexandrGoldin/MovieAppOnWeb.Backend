@@ -8,7 +8,6 @@ using System.Reflection;
 namespace MovieApp.Infrastructure.Data
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
-    //public class ApplicationContext : DbContext
     {
 #pragma warning disable CS8618 // Required by Entity Framework
         public DbSet<Order> Orders { get; set; }
@@ -25,6 +24,11 @@ namespace MovieApp.Infrastructure.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            builder.Entity<ApplicationUser>(b =>
+            {
+                b.Property(u => u.AvatarUri).HasMaxLength(100);
+            });
         }
     }
 }

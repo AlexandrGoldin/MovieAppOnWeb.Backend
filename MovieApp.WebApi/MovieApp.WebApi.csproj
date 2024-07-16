@@ -31,8 +31,4 @@
     <ProjectReference Include="..\MovieApp.Infrastructure\MovieApp.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
 </Project>

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Identity;
+using MovieApp.Infrastructure.Interfaces;
+using MovieApp.Infrastructure.Specifications;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace MovieApp.WebApi.AuthEndpoints
@@ -14,13 +16,15 @@ namespace MovieApp.WebApi.AuthEndpoints
         .WithRequest<AuthenticateRequest>
         .WithActionResult<AuthenticateResponse>
     {
+        private readonly IReadRepository<ApplicationUser> _userRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ITokenClaimsService _tokenClaimsService;
 
         public AuthenticateEndpoint(SignInManager<ApplicationUser> signInManager,
-            ITokenClaimsService tokenClaimsService)
+            IReadRepository<ApplicationUser> userRepository, ITokenClaimsService tokenClaimsService)
         {
             _signInManager = signInManager;
+            _userRepository = userRepository;
             _tokenClaimsService = tokenClaimsService;
         }
 
@@ -39,18 +43,26 @@ namespace MovieApp.WebApi.AuthEndpoints
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, set lockoutOnFailure: true
             //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-            var result = await _signInManager.PasswordSignInAsync(request.Username, request.Password, false, true);
+            var userFromSigninMenager = await _signInManager.PasswordSignInAsync(request.Username ?? "", request.Password ?? "", false, true);
 
-            if (!result.Succeeded)
-                throw new ApplicationException($"Unknown passwort: {request.Password} or username: {request.Username}.");
+            if (!userFromSigninMenager.Succeeded)
+                throw new ApplicationException("Invalid passwort end/or username.");
 
-            response.Result = result.Succeeded;
-            response.IsLockedOut = result.IsLockedOut;
-            response.IsNotAllowed = result.IsNotAllowed;
-            response.RequiresTwoFactor = result.RequiresTwoFactor;
-            response.Username = request.Username;
+            var spec = new UserDetailsSpecification(request.Username, request.Password);
+            var userFromRepository = await _userRepository.FirstOrDefaultAsync(spec,
+                cancellationToken);
 
-            response.Token = await _tokenClaimsService.GetTokenAsync(request.Username);
+            var AvatarUriDEfault = "/images/account/1.Avatar_Default_Img.png";
+
+            response.Result = userFromSigninMenager.Succeeded;
+            response.IsLockedOut = userFromSigninMenager.IsLockedOut;
+            response.IsNotAllowed = userFromSigninMenager.IsNotAllowed;
+            response.RequiresTwoFactor = userFromSigninMenager.RequiresTwoFactor;
+            response.Username = request.Username!;
+            response.AvatarUri = userFromRepository?.AvatarUri ?? AvatarUriDEfault;
+            response.PhoneNumber = userFromRepository?.PhoneNumber ?? "";
+
+            response.Token = await _tokenClaimsService.GetTokenAsync(request.Username!);
             
             return response;    
         }
