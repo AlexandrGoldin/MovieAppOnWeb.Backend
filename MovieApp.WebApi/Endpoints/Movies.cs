@@ -24,7 +24,7 @@ namespace MovieApp.WebApi.Endpoints
                 int pageSize,
                 ISender sender) =>
             {
-                var query = new GetMovieListQuery(searchTerm, sortColumn, 
+                var query = new GetMovieListQuery(searchTerm, sortColumn,
                     sortOrder, page, pageSize);
                 var movieListResponse = await sender.Send(query);
                 return Results.Ok(movieListResponse);
@@ -32,7 +32,7 @@ namespace MovieApp.WebApi.Endpoints
 
             app.MapGet("/api/movies/{id}",
                 [Authorize]
-                async (int id, ISender sender) =>
+            async (int id, ISender sender) =>
                 {
                     return Results.Ok(await sender.Send(new GetMovieDetailsQuery(id)));
                 });
@@ -45,7 +45,7 @@ namespace MovieApp.WebApi.Endpoints
 
                 return Results.Ok(movieResponse.MovieId);
             })
-              .DisableAntiforgery(); 
+              .DisableAntiforgery();
 
             app.MapPut("/api/movies/{id}", async (UpdateMovieCommand comand, ISender sender) =>
             {
@@ -60,7 +60,7 @@ namespace MovieApp.WebApi.Endpoints
             {
                 await sender.Send(new DeleteMovieCommand(id));
 
-                return Results.NoContent();   
+                return Results.NoContent();
             })
             .WithOpenApi();
         }

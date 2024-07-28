@@ -21,4 +21,9 @@
     <ProjectReference Include="..\MovieApp.Application\MovieApp.ApplicationCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Genres\Commands\" />
+    <Folder Include="Features\Genres\Queries\GetGenreDetails\" />
+  </ItemGroup>
+
 </Project>

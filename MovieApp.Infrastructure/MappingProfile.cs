@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MovieApp.Infrastructure.Entities;
+using MovieApp.Infrastructure.Features.Genres.Queries;
+using MovieApp.Infrastructure.Features.Genres.Queries.GetGenreList.GetGenreListQuery;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 
 namespace MovieApp.Infrastructure
@@ -31,6 +33,9 @@ namespace MovieApp.Infrastructure
                 movie => movie.MapFrom(movie => movie.Country!.CountryName))
                   .ForMember(movieResponse => movieResponse.GenreName,
                 movie => movie.MapFrom(movie => movie.Genre!.GenreName)).ReverseMap();
+
+            CreateMap<Genre, GenreQueryResponse>().ReverseMap();
+
         }
     }
 }

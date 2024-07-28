@@ -3,11 +3,13 @@ using MovieApp.Infrastructure.Features.Movies.Queries;
 
 namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
 {
-    public record GetMovieListQuery(
+    public record GetMovieListQuery(  
     string? SearchTerm,
     string? SortColumn,
     string? SortOrder,
     int Page,
-    int PageSize) : IRequest<PagedList<MovieQueryResponse>>;
+    int PageSize,
+    int? MinDate = null,
+    int? MaxDate = null) : IRequest<PagedList<MovieQueryResponse>>;
 
 }
