@@ -11,15 +11,17 @@ namespace MovieApp.Infrastructure.Entities
             GenreName = genreName;
         }
 
-        public static explicit operator string(Genre genre) 
+        public static explicit operator string(Genre genre)
             => genre.GenreName;
 
         public List<Movie> Movies { get; init; } = new List<Movie>();
 
-       
+
     }
+}
+
 
     //public enum GenreType {
     //    Комедия, Боевик, Мелодрама, Драма, Детектив, Триллер 
     //}
-}
+

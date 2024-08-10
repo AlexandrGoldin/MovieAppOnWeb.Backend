@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Countries\Commands\" />
+    <Folder Include="Features\Countries\Queries\GetCountryDetails\" />
     <Folder Include="Features\Genres\Commands\" />
     <Folder Include="Features\Genres\Queries\GetGenreDetails\" />
   </ItemGroup>

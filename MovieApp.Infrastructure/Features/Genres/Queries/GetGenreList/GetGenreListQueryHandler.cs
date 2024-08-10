@@ -21,20 +21,16 @@ namespace MovieApp.Infrastructure.Features.Genres.Queries.GetGenreList.GetGenreL
 
             var genreListWithoutDuplicate = (await _genreRepository.ListAsync()).Distinct();
 
-            var listRes = new List<GenreQueryResponse>();
+            var genreList = new List<GenreQueryResponse>();
 
-            foreach (var item in genreListWithoutDuplicate)
+            genreList = genreListWithoutDuplicate.Select(g => new GenreQueryResponse
             {
-                listRes.Add(new GenreQueryResponse(){ GenreName=item.GenreName, GenreValue= item.GenreName });
-            }
-            
-            //var genres= genreListWithoutDuplicate.Select(g => new GenreQueryResponse
-            //{
-            //    //GenreId = g.Id,
-            //    GenreName = g.GenreName
-            //}).ToList();
+                GenreId = g.Id,
+                GenreName = g.GenreName,
+                GenreValue = g.GenreName
+            }).ToList();
 
-            return listRes;
+            return genreList;
         }     
     }
 }

@@ -10,7 +10,7 @@ namespace MovieApp.Infrastructure.Specifications
         {
             Query.Where(m => (!genreId.HasValue || m.GenreId == genreId) &&
             (!countryId.HasValue || m.CountryId == countryId));
-        }     
+        }
     }
 }
 

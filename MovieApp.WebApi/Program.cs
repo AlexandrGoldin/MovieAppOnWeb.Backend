@@ -13,6 +13,7 @@ using MovieApp.Infrastructure.Identity;
 using MovieApp.Infrastructure.Interfaces;
 using MovieApp.Infrastructure.Services;
 using MovieApp.WebApi;
+using MovieApp.WebApi.Endpoints;
 using MovieApp.WebApi.Middleware;
 using Serilog;
 using System.Text;
@@ -143,6 +144,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCustomExceptionHandler();
+app.MapMovieEndpoints();
 app.UseHttpsRedirection();
 app.MapCarter();
 app.UseStaticFiles();

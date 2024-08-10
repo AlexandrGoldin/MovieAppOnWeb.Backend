@@ -8,6 +8,7 @@ using MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie;
 using MovieApp.Infrastructure.Features.Movies.Commands.UpdateMovie;
 using MovieApp.Infrastructure.Movies.Queries.GetMovieDetails;
 using MovieApp.Infrastructure.Movies.Queries.GetMovieList;
+//using MovieApp.Infrastructure.Movies.Queries.GetMovieList;
 
 namespace MovieApp.WebApi.Endpoints
 {
@@ -16,19 +17,19 @@ namespace MovieApp.WebApi.Endpoints
 
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/movies", async (
-                string? searchTerm,
-                string? sortColumn,
-                string? sortOrder,
-                int page,
-                int pageSize,
-                ISender sender) =>
-            {
-                var query = new GetMovieListQuery(searchTerm, sortColumn,
-                    sortOrder, page, pageSize);
-                var movieListResponse = await sender.Send(query);
-                return Results.Ok(movieListResponse);
-            });
+            //app.MapGet("/api/movies", async (
+            //    string? searchTerm,
+            //    string? sortBy,
+            //    string? primaryReleaseYear,
+            //    string[]? withGenres,
+            //    int page,
+            //    int pageSize,
+            //    ISender sender) =>
+            //{
+            //    var query = new GetMovieListQuery(searchTerm, sortBy, primaryReleaseYear, withGenres, page, pageSize);
+            //    var movieListResponse = await sender.Send(query);
+            //    return Results.Ok(movieListResponse);
+            //});
 
             app.MapGet("/api/movies/{id}",
                 [Authorize]

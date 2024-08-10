@@ -4,7 +4,6 @@ using MovieApp.Infrastructure.Features.Movies.Queries;
 using MovieApp.Infrastructure.Interfaces;
 using MovieApp.Infrastructure.Specifications;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
 
 namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
 {
@@ -21,32 +20,20 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
             _movieRepository = movieRepository;
         }
 
-        public async Task<PagedList<MovieQueryResponse>> Handle(GetMovieListQuery request,
+        public async Task<PagedList<MovieQueryResponse>> Handle(GetMovieListQuery request, 
             CancellationToken cancellationToken)
         {
             await Task.Delay(1000);
 
-            if (TryParseDateRange(request.SearchTerm, out var minDate, out var maxDate))
-            {
-                request = request with { MinDate = minDate, MaxDate = maxDate };
-            }
+            var queryParams = request.QueryParams;
 
-            var spec = request.MinDate.HasValue && request.MaxDate.HasValue
-              ? new MovieListFilterWithCountryAndGenreSpec(request.MinDate.Value, request.MaxDate.Value)
-              : new MovieListFilterWithCountryAndGenreSpec(request.SearchTerm);
+            var spec = new MovieListFilterWithCountryAndGenreSpec(queryParams);
 
             var movieList = (await _movieRepository.ListAsync(spec, cancellationToken));
 
-            if (request.SortOrder?.ToLower() == "desc")
-            {
-                movieList = movieList?.AsQueryable().OrderByDescending(SortForMovies(request))
-                    .ToList();
-            }
-            else
-            {
-                movieList = movieList?.AsQueryable().OrderBy(SortForMovies(request))
-                    .ToList();
-            }
+            movieList = GetMovieListFilteredByGenreAndCountry(queryParams, movieList);
+
+            movieList = GetSortedListOfMovies(queryParams, movieList);
 
             var movieResponses = movieList!
                 .Select(m => new MovieQueryResponse
@@ -66,38 +53,73 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
 
             var movies = PagedList<MovieQueryResponse>.CreateAsync(
                 movieResponses.ToList(),
-                request.Page,
-                request.PageSize);
+                queryParams.Page,
+                queryParams.PageSize);
             return movies;
         }
 
-        private static Expression<Func<Movie, object>> SortForMovies(GetMovieListQuery request)
-            => request.SortColumn?.ToLower() switch
-            {
-                "releaseDate" => movie => movie.ReleaseDate!,
-                "rating" => movie => movie.Rating,
-                _ => movie => movie.Id
-            };
-
-
-        private static bool TryParseDateRange(string? searchTerm, out int minDate, out int maxDate)
+        private static List<Movie>? GetMovieListFilteredByGenreAndCountry(MovieQueryParams queryParams, List<Movie>? movieList)
         {
-            minDate = maxDate = 0;
-            if (string.IsNullOrWhiteSpace(searchTerm)) return false;
-
-            var regex = new Regex(@"^(19|20)\d{2},\s*(19|20)\d{2}$");
-            var match = regex.Match(searchTerm);
-            if (!match.Success) return false;
-
-            var dates = searchTerm.Split(',').Select(s => int.Parse(s.Trim())).ToArray();
-            if (dates[0] < dates[1])
+            if (!string.IsNullOrWhiteSpace(queryParams.WithCountries)
+                && !string.IsNullOrWhiteSpace(queryParams.WithGenres))
             {
-                minDate = dates[0];
-                maxDate = dates[1];
-                return true;
+                string[] stringArrayCountry = queryParams.WithCountries.Split(',');
+                var arrayCountryIds = Array.ConvertAll(stringArrayCountry, int.Parse);
+
+                movieList = movieList!.Where(m => arrayCountryIds.Contains(m.CountryId)).ToList();
             }
 
-            return false;
+            return movieList;
         }
+
+        private static List<Movie>? GetSortedListOfMovies(MovieQueryParams queryParams, List<Movie>? movieList)
+        {
+            string sortColumn, sortOrder;
+            GetMovieSortingDirection(queryParams, out sortColumn, out sortOrder);
+
+            movieList = SortingMovies(movieList, sortColumn, sortOrder);
+            return movieList;
+        }
+
+        private static List<Movie>? SortingMovies(List<Movie>? movieList, string sortColumn, string sortOrder)
+        {
+            if (sortOrder.ToLower() == "desc")
+            {
+                movieList = movieList?.AsQueryable().OrderByDescending(GetFieldToSortMovies(sortColumn))
+                    .ToList();
+            }
+            else
+            {
+                movieList = movieList?.AsQueryable().OrderBy(GetFieldToSortMovies(sortColumn))
+                    .ToList();
+            }
+
+            return movieList;
+        }
+
+        private static void GetMovieSortingDirection(MovieQueryParams queryParams, out string sortColumn, out string sortOrder)
+        {
+            sortColumn = "rating";
+            sortOrder = "desc";
+            if (!string.IsNullOrWhiteSpace(queryParams.SortBy))
+            {
+                var sortParams = queryParams.SortBy.Split('.');
+                if (sortParams.Length == 2)
+                {
+                    sortColumn = sortParams[0];
+                    sortOrder = sortParams[1];
+                }
+            }
+        }
+
+        private static Expression<Func<Movie, object>> GetFieldToSortMovies(string sortColumn)
+            => sortColumn.ToLower() switch
+            {
+                "release_date" => movie => movie.ReleaseDate!,
+                "rating" => movie => movie.Rating,
+                _ => movie => movie.Rating
+            };
     }
 }
+
+
