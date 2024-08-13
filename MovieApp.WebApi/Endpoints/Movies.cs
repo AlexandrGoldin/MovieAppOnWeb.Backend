@@ -31,39 +31,39 @@ namespace MovieApp.WebApi.Endpoints
             //    return Results.Ok(movieListResponse);
             //});
 
-            app.MapGet("/api/movies/{id}",
-                [Authorize]
-            async (int id, ISender sender) =>
-                {
-                    return Results.Ok(await sender.Send(new GetMovieDetailsQuery(id)));
-                });
+            //app.MapGet("/api/movies/{id}",
+            //    [Authorize]
+            //async (int id, ISender sender) =>
+            //    {
+            //        return Results.Ok(await sender.Send(new GetMovieDetailsQuery(id)));
+            //    });
 
-            app.MapPost("/api/movies",
-                [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-            async (CreateMovieCommand comand, ISender sender) =>
-            {
-                var movieResponse = await sender.Send(comand);
+            //app.MapPost("/api/movies",
+            //    [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+            //async (CreateMovieCommand comand, ISender sender) =>
+            //{
+            //    var movieResponse = await sender.Send(comand);
 
-                return Results.Ok(movieResponse.MovieId);
-            })
-              .DisableAntiforgery();
+            //    return Results.Ok(movieResponse.MovieId);
+            //})
+            //  .DisableAntiforgery();
 
-            app.MapPut("/api/movies/{id}", async (UpdateMovieCommand comand, ISender sender) =>
-            {
-                var movieResponse = await sender.Send(comand);
+            //app.MapPut("/api/movies/{id}", async (UpdateMovieCommand comand, ISender sender) =>
+            //{
+            //    var movieResponse = await sender.Send(comand);
 
-                return Results.Ok(movieResponse.MovieId);
-            });
+            //    return Results.Ok(movieResponse.MovieId);
+            //});
 
-            app.MapDelete("/api/movies/{id}",
-                 [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-            async (int id, ISender sender) =>
-            {
-                await sender.Send(new DeleteMovieCommand(id));
+            //app.MapDelete("/api/movies/{id}",
+            //     [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+            //async (int id, ISender sender) =>
+            //{
+            //    await sender.Send(new DeleteMovieCommand(id));
 
-                return Results.NoContent();
-            })
-            .WithOpenApi();
+            //    return Results.NoContent();
+            //})
+            //.WithOpenApi();
         }
     }
 

@@ -8,7 +8,6 @@ namespace MovieApp.Infrastructure.Features.Genres.Queries.GetGenreList.GetGenreL
         IRequestHandler<GetGenresListQuery, List<GenreQueryResponse>>
     {
         private readonly IReadRepository<Genre> _genreRepository;
-        //private readonly IMapper _mapper;
 
         public GetGenreListQueryHandler(IReadRepository<Genre> genreRepository)
         {
