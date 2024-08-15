@@ -8,7 +8,6 @@ namespace MovieApp.Infrastructure.Features.Countries.Queries.GetCountryList
         : IRequestHandler<GetCountryListQuery, List<CountryQueryResponse>>
     {
         private readonly IReadRepository<Country> _countryRepository;
-        //private readonly IMapper _mapper;
 
         public GetCountryListQueryHandler(IReadRepository<Country> countryRepository)
         {

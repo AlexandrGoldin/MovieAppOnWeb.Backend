@@ -1,4 +1,5 @@
-﻿using MovieApp.Infrastructure.Entities;
+﻿using AutoMapper;
+using MovieApp.Infrastructure.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 using MovieApp.Infrastructure.Interfaces;
 using MovieApp.Infrastructure.Specifications;
@@ -8,23 +9,28 @@ namespace MovieApp.Infrastructure.Services
     public class MovieFilteringService : IMovieFilteringService
     {
         private readonly IReadRepository<Movie> _movieRepository;
+        private readonly IUriComposer _uriComposer;
+        private readonly IMapper _mapper;
 
-        public MovieFilteringService(IReadRepository<Movie> movieRepository)
+        public MovieFilteringService
+            (IUriComposer uriComposer, IReadRepository<Movie> movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _uriComposer = uriComposer;
+            _mapper = mapper;
         }
 
-        public async Task<List<Movie>> FilteringMoviesAsync(MovieQueryParams queryParams,
+        public async Task<List<MovieQueryResponse>> FilteringMoviesAsync(MovieQueryParams queryParams,
             CancellationToken cancellationToken)
         {
-            var movieList = new List<Movie>();
             if (string.IsNullOrWhiteSpace(queryParams.WithGenres)
                     || string.IsNullOrWhiteSpace(queryParams.WithCountries))
             {
                 var spec = new MovieListFilterWithCountryAndGenreSpec(queryParams);
 
-                movieList = await _movieRepository.ListAsync(spec, cancellationToken);
-                return movieList;
+                var movieList = await _movieRepository.ListAsync(spec, cancellationToken);
+
+                return MappingMovieListToMovieQueryResponseList(movieList);
             }
             
                 var queryParamsWithGenres =
@@ -42,8 +48,8 @@ namespace MovieApp.Infrastructure.Services
             var specForGenre =
                 new MovieListFilterWithCountryAndGenreSpec(queryParamsWithGenres);
 
-            var movieListFilterByGenres =
-                await _movieRepository.ListAsync(specForGenre, cancellationToken);
+            var movieListFilterByGenres
+                = MappingMovieListToMovieQueryResponseList(await _movieRepository.ListAsync(specForGenre, cancellationToken));
 
             var queryParamsWithCountries = new MovieQueryParams
             {
@@ -59,13 +65,25 @@ namespace MovieApp.Infrastructure.Services
             var specForCountries =
                 new MovieListFilterWithCountryAndGenreSpec(queryParamsWithCountries);
 
-            var movieListFilterByCountries = (await _movieRepository
-                .ListAsync(specForCountries));
+            var movieListFilterByCountries
+                = MappingMovieListToMovieQueryResponseList(await _movieRepository.ListAsync(specForCountries));
 
-            movieList = movieListFilterByGenres.
-                Intersect(movieListFilterByCountries).ToList();
+            var movieListRes = movieListFilterByGenres.
+               Intersect(movieListFilterByCountries).ToList();
 
-            return movieList;
+            return movieListRes;
+        }
+
+        private List<MovieQueryResponse> MappingMovieListToMovieQueryResponseList(List<Movie> movieList)
+        {
+            var movieQueryResponseList = movieList!
+                .Select(_mapper.Map<MovieQueryResponse>).ToList();
+            foreach (MovieQueryResponse movie in movieQueryResponseList) 
+            {
+                movie.PictureUri = _uriComposer.ComposePicUri(movie.PictureUri!);
+            }
+
+           return movieQueryResponseList;    
         }
     }
 }

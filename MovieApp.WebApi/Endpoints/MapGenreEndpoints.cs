@@ -1,12 +1,11 @@
-﻿using Carter;
-using MediatR;
+﻿using MediatR;
 using MovieApp.Infrastructure.Features.Genres.Queries.GetGenreList;
 
 namespace MovieApp.WebApi.Endpoints
 {
-    public class Genres : ICarterModule
+    public static class GenresEndpoints
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public static void MapGenreEndpoints(this IEndpointRouteBuilder app)
         {
             app.MapGet("/api/genres", async (ISender sender) =>
             {

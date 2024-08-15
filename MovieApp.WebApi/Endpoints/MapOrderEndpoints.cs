@@ -9,14 +9,14 @@ using MovieApp.Infrastructure.Features.Orders.Commands.DeleteOrder;
 
 namespace MovieApp.WebApi.Endpoints
 {
-    public class Orders : ICarterModule
+    public static class OrdersEndpoints
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public static void MapOrderEndpoints(this IEndpointRouteBuilder app)
         {
             app.MapPost("/api/orders",
                [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
             async (CreateOrderCommand comand, ISender sender) =>
-            {             
+            {
                 var orderResponse = await sender.Send(comand);
 
                 return Results.Ok(orderResponse.OrderId);
@@ -27,11 +27,11 @@ namespace MovieApp.WebApi.Endpoints
             app.MapDelete("/api/orders/{id}",
                  [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
             async (int id, ISender sender) =>
-                {
-                    await sender.Send(new DeleteOrderCommand(id));
+            {
+                await sender.Send(new DeleteOrderCommand(id));
 
-                    return Results.NoContent();
-                });
+                return Results.NoContent();
+            });
         }
     }
 }

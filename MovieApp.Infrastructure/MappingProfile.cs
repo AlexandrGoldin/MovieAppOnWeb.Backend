@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MovieApp.Infrastructure.Entities;
+using MovieApp.Infrastructure.Features.Countries.Queries;
 using MovieApp.Infrastructure.Features.Genres.Queries;
-using MovieApp.Infrastructure.Features.Genres.Queries.GetGenreList.GetGenreListQuery;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 
 namespace MovieApp.Infrastructure
@@ -10,6 +10,8 @@ namespace MovieApp.Infrastructure
     {
         public MappingProfile()
         {
+            // The value of property MovieQueryResponse.PictureUri is set in the
+            // method MovieFilteringService.MappingMovieListToMovieQueryResponseList.
             CreateMap<Movie, MovieQueryResponse>()
                 .ForMember(movieResponse => movieResponse.MovieId,
                 movie => movie.MapFrom(movie => movie.Id))
@@ -21,8 +23,6 @@ namespace MovieApp.Infrastructure
                 movie => movie.MapFrom(movie => movie.Description))
                   .ForMember(movieResponse => movieResponse.Price,
                 movie => movie.MapFrom(movie => movie.Price))
-                  .ForMember(movieResponse => movieResponse.PictureUri,
-                movie => movie.MapFrom(movie => movie.PictureUri))
                  .ForMember(movieResponse => movieResponse.Audience,
                 movie => movie.MapFrom(movie => movie.Audience))
                  .ForMember(movieResponse => movieResponse.Rating,
@@ -35,6 +35,8 @@ namespace MovieApp.Infrastructure
                 movie => movie.MapFrom(movie => movie.Genre!.GenreName)).ReverseMap();
 
             CreateMap<Genre, GenreQueryResponse>().ReverseMap();
+
+            CreateMap<Country, CountryQueryResponse>().ReverseMap();
 
         }
     }

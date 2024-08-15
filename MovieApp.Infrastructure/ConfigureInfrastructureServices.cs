@@ -44,6 +44,8 @@ namespace MovieApp.Infrastructure
             services.AddTransient<IMovieSortingService, MovieSortingService>();
 
             services.AddHttpContextAccessor();
+            // ?!
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
         }

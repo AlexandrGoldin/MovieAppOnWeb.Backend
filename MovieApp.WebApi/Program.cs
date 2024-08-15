@@ -145,6 +145,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseCustomExceptionHandler();
 app.MapMovieEndpoints();
+app.MapCountryEndpoints();
+app.MapOrderEndpoints();
+app.MapGenreEndpoints();
 app.UseHttpsRedirection();
 app.MapCarter();
 app.UseStaticFiles();

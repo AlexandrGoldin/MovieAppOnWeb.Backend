@@ -2,6 +2,6 @@
 {
     public interface IUriComposer
     {
-        string ComposePicUri(string uriTemplate);
+        string ComposePicUri(string? uriTemplate);
     }
 }

@@ -1,12 +1,11 @@
-﻿using Carter;
-using MediatR;
+﻿using MediatR;
 using MovieApp.Infrastructure.Features.Countries.Queries.GetCountryList;
 
 namespace MovieApp.WebApi.Endpoints
 {
-     public class Countries : ICarterModule
+    public static class CountriesEndpoints
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public static void MapCountryEndpoints(this IEndpointRouteBuilder app)
         {
             app.MapGet("/api/countries", async (ISender sender) =>
             {

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MovieApp.Infrastructure.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 using MovieApp.Infrastructure.Interfaces;
 
@@ -11,7 +12,7 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
         private readonly IMovieFilteringService _movieFilteringService;
         private readonly IMovieSortingService _movieSortingService;
 
-        public GetMovieListQueryHandler(IMovieFilteringService movieFilteringService, 
+        public GetMovieListQueryHandler(IMovieFilteringService movieFilteringService,
             IMovieSortingService movieSortingService, IUriComposer uriComposer)
         {
             _uriComposer = uriComposer;
@@ -19,19 +20,29 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
             _movieSortingService = movieSortingService;
         }
 
-        public async Task<PagedList<MovieQueryResponse>> Handle(GetMovieListQuery request, 
+        public async Task<PagedList<MovieQueryResponse>> Handle(GetMovieListQuery request,
             CancellationToken cancellationToken)
         {
             await Task.Delay(1000);
 
             var queryParams = request.QueryParams;
 
-            var movieList = await _movieFilteringService.FilteringMoviesAsync(request.QueryParams,
-            cancellationToken);
-          
-            movieList = await _movieSortingService.SortingMoviesAsync(request.QueryParams, movieList);
+            var movieQueryResponseList = await _movieFilteringService.FilteringMoviesAsync(request.QueryParams,
+           cancellationToken);
 
-            var movieResponses = movieList!
+            movieQueryResponseList = await _movieSortingService.SortingMoviesAsync(request.QueryParams, movieQueryResponseList);
+
+
+            var movies = PagedList<MovieQueryResponse>.CreateAsync(
+                movieQueryResponseList,
+                queryParams.Page,
+            queryParams.PageSize);
+            return movies;
+        }
+
+        private IEnumerable<MovieQueryResponse> MappingMovieListToMovieQueryResponseList(List<Movie> movieList)
+        {
+            return movieList!
                 .Select(m => new MovieQueryResponse
                 {
                     MovieId = m.Id,
@@ -46,14 +57,10 @@ namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
                     CountryName = m.Country!.CountryName,
                     GenreName = m.Genre!.GenreName
                 });
-
-            var movies = PagedList<MovieQueryResponse>.CreateAsync(
-                movieResponses.ToList(),
-                queryParams.Page,
-                queryParams.PageSize);
-            return movies;
         }
     }
 }
+
+
 
 
