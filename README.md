@@ -25,7 +25,7 @@
 * Entity Framework Core 8
 * MS SQL Server
 * N-tier architecture
-* The App implement a classApplicationContext : IdentityDbContext<ApplicationUser> for interacting with database.
+* The App implement a classApplicationContext : IdentityDbContext\<ApplicationUser> for interacting with database.
 * CORS
 * Swashbuckle.AspNetCore.SwaggerUI
 * Data Transfer Object
