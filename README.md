@@ -23,7 +23,6 @@
 * Ardalis.ApiEndpoints https://www.nuget.org/packages/Ardalis.ApiEndpoints/
 * Global exception handler middleware
 * CQRS MediatR
-* Global exception handler middleware
 * FluentValidation
 * Entity Framework Core 8
 * MS SQL Server
