@@ -5,6 +5,7 @@
  ### Developed in Visual Studio 2022
  #### This is the backend of the app for the MovieAppOnWeb demo site.
  #### Uses Asp.Net Core 8 Minimal API/Controllers.
+ ________
  #### This application launches successfully but not all functionality is implemented(the project is in development and not finished).
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
