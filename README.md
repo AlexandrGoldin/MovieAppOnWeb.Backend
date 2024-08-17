@@ -5,7 +5,7 @@
  ### Developed in Visual Studio 2022
  #### This is the backend of the app for the movie demo site.
  #### Uses Asp.Net Core 8 Minimal API/Controllers.
- #### To run the SPA you need to run together with MovieApp.Fpontend.
+ #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project
  ___
