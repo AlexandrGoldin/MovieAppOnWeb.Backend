@@ -1,7 +1,6 @@
  ## MovieApp.Backend
  ### The project is in development and not finished
- ### This is the final application developed according to the book "Architecting Modern Web Applications with ASP.NET Core and Azure". Updated to 
- ### ASP.NET Core 8.0.
+ ### This is the final application developed according to the book "Architecting Modern Web Applications with ASP.NET Core and Azure". Updated to ASP.NET Core 8.0.
  ### You can also read the book in online pages at the .NET docs here: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/
  ### Developed in Visual Studio 2022
  #### This is the backend of the app for the MovieAppOnWeb demo site.
