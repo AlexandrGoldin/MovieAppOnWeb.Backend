@@ -6,7 +6,11 @@
  #### This is the backend of the app for the MovieAppOnWeb demo site.
  #### Uses Asp.Net Core 8 Minimal API/Controllers.
  ________
- #### This application launches successfully but not all functionality is implemented(the project is in development and not finished).
+ ### This application launches successfully but not all functionality is implemented(the project is in development and not finished).
+ #### At the moment, the functionality for the main page has been implemented. Authentication and authorization, sending and displaying a list of 
+ #### films have been implemented. Search, sorting, filtering, pagination. Sending a list of genres and a list of countries. After authorization, 
+ #### the method 'app.MapGet("/api/movies/{id}"...)' is available. and the method 'public async Task<IActionResult> Logout()'.
+ __________
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project
