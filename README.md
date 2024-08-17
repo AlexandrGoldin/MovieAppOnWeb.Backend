@@ -15,7 +15,7 @@
 * Minimal API/Controllers
 * Authenticate end Authorization with JWT Bearer Token. The App uses packages Microsoft.AspNetCore.Authentication.JwtBearer, System.IdentityModel.Tokens.Jwt.
 * Ardalis.GuardClauses https://www.nuget.org/packages/Ardalis.GuardClauses
-* * Ardalis.Specification https://www.nuget.org/packages/Ardalis.Specification/
+* Ardalis.Specification https://www.nuget.org/packages/Ardalis.Specification/
 * Ardalis.Specification.EntityFrameworkCore https://www.nuget.org/packages/Ardalis.Specification.EntityFrameworkCore
 * Ardalis.ApiEndpoints https://www.nuget.org/packages/Ardalis.ApiEndpoints/
 * Global exception handler middleware
