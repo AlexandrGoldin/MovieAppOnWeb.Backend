@@ -17,6 +17,10 @@
  ____________
  ### Aviable authorizations
  ![Aviable authorizations](https://github.com/user-attachments/assets/153a2d59-bc18-493a-80c9-e2823b9fc434)
+ ____________
+ ### Method POST/api/authenticate return JWT token for authorization
+ ![authenticate token](https://github.com/user-attachments/assets/8b7b7a64-2fb1-4686-ae05-9d279fd162d9)
+ ____
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend.
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project.
