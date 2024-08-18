@@ -21,6 +21,11 @@
  ### Method POST/api/authenticate return JWT token for authorization
  ![authenticate token](https://github.com/user-attachments/assets/8b7b7a64-2fb1-4686-ae05-9d279fd162d9)
  ____
+ ### To access the method GET/api/movies/{id} use  "username": "admin@microsoft.com", "password": "Pass@word1".
+ ![Get api movies {id}](https://github.com/user-attachments/assets/7d822431-4add-4999-b70c-a31ebd630cfe)
+ _______
+ ### To access are methods POST, PUT, DELETE for movies use "username": "admin@microsoft.com", "password": "Pass@word1".
+ ______
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend.
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project.
