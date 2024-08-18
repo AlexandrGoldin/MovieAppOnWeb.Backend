@@ -13,6 +13,8 @@
  __________
  ### To authorize use the method AuthEndpoints POST/api/authenticate. For User log in use "username": "demouser@microsoft.com", and"password": "Pass@word1".
  ### For admin log in use "username": "admin@microsoft.com", "password": "Pass@word1".
+ ![AuthEndpoint](https://github.com/user-attachments/assets/6ea89c53-e75b-4df3-bca5-82a5902077cc)
+ ____________
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend.
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project.
