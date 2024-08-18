@@ -11,6 +11,8 @@
  ### At the moment, the functionality for the main page has been implemented. Authentication and authorization, sending and displaying a list of movies have been implemented. Search, sorting, filtering, pagination. Sending a list of genres and a list of countries. After authorization the method 'app.MapGet("/api/movies/{id}"...)' is available. and the method 'public async Task<IActionResult> Logout()'.
  ![main page](https://github.com/user-attachments/assets/bcb54aad-8377-4752-abbe-1923f147d6d3)
  __________
+ ### To authorize use the method AuthEndpoints POST/api/authenticate. For User log in use "username": "demouser@microsoft.com", and"password": "Pass@word1".
+ ### For admin log in use "username": "admin@microsoft.com", "password": "Pass@word1".
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend.
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project.
