@@ -15,6 +15,8 @@
  ### For admin log in use "username": "admin@microsoft.com", "password": "Pass@word1".
  ![AuthEndpoint](https://github.com/user-attachments/assets/6ea89c53-e75b-4df3-bca5-82a5902077cc)
  ____________
+ ### Aviable authorizations
+ ![Aviable authorizations](https://github.com/user-attachments/assets/153a2d59-bc18-493a-80c9-e2823b9fc434)
  #### To run the SPA you need to run together with MovieApp.Frontend. https://github.com/AlexandrGoldin/MovieApp.Fpontend.
  #### When migrating a database, the MovieApp.Infrastructure project is specified in the Package Manager Console.
  #### The ApplicationContext : IdentityDbContext<ApplicationUser> is in the "MovieApp.Infrastructure" project.
