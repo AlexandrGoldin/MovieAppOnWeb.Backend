@@ -1,5 +1,6 @@
  ## MovieApp.Backend
- ### The project is in development and not finished.
+ ### This application launches successfully but not all functionality is implemented(the project is in development and not finished).
+ ### To run the MovieAppOnWeb SPA you need to run together with MovieApp.Fpontend.(https://github.com/AlexandrGoldin/MovieApp.Fpontend). 
  ### This is the final application developed according to the book "Architecting Modern Web Applications with ASP.NET Core and Azure". Updated to ASP.NET Core 8.0. Author: Steve “ardalis” Smith.
  ### Also used is the demo application eShopOnWeb from this book.
  ### You can also read the book in online pages at the .NET docs here: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/
