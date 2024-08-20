@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Carter;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using MovieApp.ApplicationCore.Constants;

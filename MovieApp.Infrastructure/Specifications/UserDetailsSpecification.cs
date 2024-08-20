@@ -7,7 +7,7 @@ namespace MovieApp.Infrastructure.Specifications
     {
         public UserDetailsSpecification(string? userName, string? Password)
         {
-            Query.Where(user => user.UserName == userName && user.Id == Password );
+            Query.Where(user => user.UserName == userName && user.Id == Password);
         }
     }
 }

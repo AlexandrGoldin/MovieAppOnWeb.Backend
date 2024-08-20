@@ -4,7 +4,7 @@ using MovieApp.Infrastructure.Features.Countries.Queries;
 using MovieApp.Infrastructure.Features.Genres.Queries;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 
-namespace MovieApp.Infrastructure
+namespace MovieApp.Infrastructure.Common.Mappings
 {
     public class MappingProfile : Profile
     {

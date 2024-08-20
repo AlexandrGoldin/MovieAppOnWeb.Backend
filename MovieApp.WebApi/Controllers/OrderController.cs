@@ -10,7 +10,6 @@ using MovieApp.Infrastructure.Features.Orders.Queries.GetOrderList;
 namespace MovieApp.WebApi.Controllers
 {
     [Authorize(Roles = Roles.ADMINISTRATORS, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    //[Authorize] // Controllers that mainly require Authorization still use Controller/Ok; other pages use Pages
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrderController : ControllerBase

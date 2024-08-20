@@ -7,9 +7,9 @@ namespace MovieApp.ApplicationCore.Entities.BuyerAggregate
     {
         public string IdentityGuid { get; private set; }
 
-        private PaymentMethod _paymentMethod { get; set; } //= new PaymentMethod();
+        private List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
 
-        public PaymentMethod PaymentMethod => _paymentMethod;
+        public IEnumerable<PaymentMethod> PaymentMethods => _paymentMethods.AsReadOnly();
 
 #pragma warning disable CS8618 // Required by Entity Framework
         private Buyer() { }

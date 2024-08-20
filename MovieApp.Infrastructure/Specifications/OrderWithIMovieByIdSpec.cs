@@ -12,7 +12,7 @@ namespace MovieApp.Infrastructure.Specifications
                 .Include(o => o.Movie)
                   .ThenInclude(m => m.Genre)
                 .Include(o => o.Movie)
-                  .ThenInclude(m => m.Country);             
+                  .ThenInclude(m => m.Country);
         }
     }
 }

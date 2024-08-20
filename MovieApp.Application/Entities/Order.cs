@@ -16,11 +16,11 @@ namespace MovieApp.ApplicationCore.Entities
 
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
 
-        public string BuyerId { get; set; }
+        public string BuyerId { get; set; } = null!;
 
         public int MovieId { get; set; }
 
-        public Movie Movie { get; set; }
+        public Movie Movie { get; set; } = null!; 
     }
 }
        

@@ -21,7 +21,4 @@ namespace MovieApp.Infrastructure.Entities
 }
 
 
-    //public enum GenreType {
-    //    Комедия, Боевик, Мелодрама, Драма, Детектив, Триллер 
-    //}
 

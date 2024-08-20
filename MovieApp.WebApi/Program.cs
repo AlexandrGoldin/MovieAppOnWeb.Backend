@@ -1,13 +1,12 @@
-using Carter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinimalApi.Endpoint.Extensions;
 using MovieApp.ApplicationCore.Constants;
 using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure;
+using MovieApp.Infrastructure.Common.Mappings;
 using MovieApp.Infrastructure.Data;
 using MovieApp.Infrastructure.Identity;
 using MovieApp.Infrastructure.Interfaces;
@@ -22,8 +21,6 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpoints();
-
-builder.Services.AddCarter();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -149,7 +146,6 @@ app.MapCountryEndpoints();
 app.MapOrderEndpoints();
 app.MapGenreEndpoints();
 app.UseHttpsRedirection();
-app.MapCarter();
 app.UseStaticFiles();
 
 app.UseRouting();
