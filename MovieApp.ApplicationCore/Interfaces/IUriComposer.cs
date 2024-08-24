@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Infrastructure.Interfaces
+﻿namespace MovieApp.ApplicationCore.Interfaces
 {
     public interface IUriComposer
     {
