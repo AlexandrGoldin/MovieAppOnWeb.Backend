@@ -1,6 +1,7 @@
 ﻿using MediatR;
-using MovieApp.Infrastructure.Entities;
+using MovieApp.ApplicationCore.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
+using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Interfaces;
 
 namespace MovieApp.Infrastructure.Movies.Queries.GetMovieList
