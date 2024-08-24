@@ -1,8 +1,8 @@
 ﻿using Ardalis.GuardClauses;
 using MediatR;
-using MovieApp.Infrastructure.Entities;
-using MovieApp.Infrastructure.Exceptions;
-using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore.Entities;
+using MovieApp.ApplicationCore.Exceptions;
+using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Specifications;
 
 namespace MovieApp.Infrastructure.Features.Movies.Commands.CreateMovie
