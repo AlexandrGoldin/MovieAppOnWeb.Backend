@@ -1,4 +1,3 @@
-﻿using Ardalis.GuardClauses;
 using AutoMapper;
 using MediatR;
 using MovieApp.ApplicationCore.Entities;
