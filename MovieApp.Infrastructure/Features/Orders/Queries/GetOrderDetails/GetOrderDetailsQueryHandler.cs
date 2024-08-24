@@ -3,7 +3,7 @@ using AutoMapper;
 using MediatR;
 using MovieApp.ApplicationCore.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
-using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Specifications;
 
 namespace MovieApp.Infrastructure.Features.Orders.Queries.GetOrderDetails
