@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MovieApp.Infrastructure.Entities;
+using MovieApp.ApplicationCore.Entities;
 using MovieApp.Infrastructure.Features.Countries.Queries;
 using MovieApp.Infrastructure.Features.Genres.Queries;
 using MovieApp.Infrastructure.Features.Movies.Queries;
