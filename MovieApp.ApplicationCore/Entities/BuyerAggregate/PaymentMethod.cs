@@ -1,4 +1,4 @@
-﻿using MovieApp.Infrastructure.Entities;
+﻿using MovieApp.ApplicationCore.Entities;
 
 namespace MovieApp.ApplicationCore.Entities.BuyerAggregate
 {
