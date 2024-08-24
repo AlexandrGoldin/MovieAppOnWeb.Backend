@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
-using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore.Interfaces;
 
-namespace MovieApp.Infrastructure.Entities
+namespace MovieApp.ApplicationCore.Entities
 {
     public class Movie : BaseEntity, IAggregateRoot
     {
