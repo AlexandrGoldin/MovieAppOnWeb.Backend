@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MovieApp.Application\MovieApp.ApplicationCore.csproj" />
+    <ProjectReference Include="..\MovieApp.ApplicationCore\MovieApp.ApplicationCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
