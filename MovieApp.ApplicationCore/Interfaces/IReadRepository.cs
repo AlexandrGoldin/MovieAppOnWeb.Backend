@@ -1,6 +1,6 @@
 ﻿using Ardalis.Specification;
 
-namespace MovieApp.Infrastructure.Interfaces
+namespace MovieApp.ApplicationCore.Interfaces
 {
     public interface IReadRepository<T> : IReadRepositoryBase<T> where T : class, IAggregateRoot
     {
