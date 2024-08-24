@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Infrastructure
+﻿namespace MovieApp.ApplicationCore
 {
     public class CatalogSettings
     {
