@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using MovieApp.ApplicationCore.Entities;
-using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore.Interfaces;
 
 namespace MovieApp.Infrastructure.Features.Orders.Commands.CreateOrder
 {
