@@ -1,8 +1,8 @@
 ﻿using Ardalis.GuardClauses;
 using MediatR;
-using MovieApp.Infrastructure.Entities;
+using MovieApp.ApplicationCore.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
-using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Specifications;
 
 namespace MovieApp.Infrastructure.Movies.Queries.GetMovieDetails
