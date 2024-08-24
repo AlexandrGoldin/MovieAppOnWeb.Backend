@@ -1,15 +1,7 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using MediatR;
 using MovieApp.ApplicationCore.Entities;
-using MovieApp.Infrastructure.Entities;
-using MovieApp.Infrastructure.Exceptions;
-using MovieApp.Infrastructure.Features.Movies.Commands.DeleteMovie;
-using MovieApp.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MovieApp.ApplicationCore.Interfaces;
 
 namespace MovieApp.Infrastructure.Features.Orders.Commands.DeleteOrder
 {
