@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Infrastructure.Entities
+﻿namespace MovieApp.ApplicationCore.Entities
 {
     public abstract class BaseEntity
     {
