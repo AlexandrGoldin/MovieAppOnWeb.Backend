@@ -1,4 +1,5 @@
-﻿using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore;
+using MovieApp.ApplicationCore.Interfaces;
 
 namespace MovieApp.Infrastructure.Services
 {
