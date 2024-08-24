@@ -1,5 +1,5 @@
 ﻿using Ardalis.Specification;
-using MovieApp.Infrastructure.Entities;
+using MovieApp.ApplicationCore.Entities;
 using MovieApp.Infrastructure.Features.Movies.Queries;
 
 namespace MovieApp.Infrastructure.Specifications
