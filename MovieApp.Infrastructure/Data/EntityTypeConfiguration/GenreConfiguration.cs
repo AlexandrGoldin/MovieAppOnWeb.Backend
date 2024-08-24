@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MovieApp.Infrastructure.Entities;
+using MovieApp.ApplicationCore.Entities;
 
 namespace MovieApp.Infrastructure.Data.EntityTypeConfiguration
 {
