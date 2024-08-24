@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure.Identity;
-using MovieApp.Infrastructure.Interfaces;
 using MovieApp.Infrastructure.Specifications;
 using Swashbuckle.AspNetCore.Annotations;
 
