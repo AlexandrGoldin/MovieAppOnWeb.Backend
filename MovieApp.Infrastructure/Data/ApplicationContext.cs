@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MovieApp.ApplicationCore.Entities;
-using MovieApp.Infrastructure.Entities;
 using MovieApp.Infrastructure.Identity;
 using System.Reflection;
 
