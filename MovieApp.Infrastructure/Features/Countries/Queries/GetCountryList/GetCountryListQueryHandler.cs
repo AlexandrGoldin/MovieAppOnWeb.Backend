@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using MovieApp.Infrastructure.Entities;
-using MovieApp.Infrastructure.Interfaces;
+using MovieApp.ApplicationCore.Entities;
+using MovieApp.ApplicationCore.Interfaces;
 
 namespace MovieApp.Infrastructure.Features.Countries.Queries.GetCountryList
 {
