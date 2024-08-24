@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Infrastructure.Exceptions
+﻿namespace MovieApp.ApplicationCore.Exceptions
 {
     public class DuplicateException : Exception
     {
