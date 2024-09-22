@@ -1,7 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using MovieApp.ApplicationCore.Entities;
 using MovieApp.ApplicationCore.Interfaces;
-
 namespace MovieApp.ApplicationCore.Entities.BuyerAggregate
 {
     public class Buyer : BaseEntity, IAggregateRoot

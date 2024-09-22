@@ -43,7 +43,7 @@ namespace MovieApp.WebApi.Endpoints
           });
 
             app.MapGet("/api/movies/{id}",
-              [Authorize]
+              //[Authorize]
             async (int id, ISender sender) =>
               {
                   return Results.Ok(await sender.Send(new GetMovieDetailsQuery(id)));

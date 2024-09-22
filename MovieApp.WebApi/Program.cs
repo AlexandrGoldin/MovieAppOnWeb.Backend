@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinimalApi.Endpoint.Extensions;
+using MovieApp.ApplicationCore;
 using MovieApp.ApplicationCore.Constants;
 using MovieApp.ApplicationCore.Interfaces;
 using MovieApp.Infrastructure;
