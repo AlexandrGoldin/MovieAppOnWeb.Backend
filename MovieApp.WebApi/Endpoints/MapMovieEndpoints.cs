@@ -12,7 +12,7 @@ using MovieApp.Infrastructure.Movies.Queries.GetMovieList;
 
 namespace MovieApp.WebApi.Endpoints
 {
-    public static class MovieEndpoints
+    public static class MovieEndpointsgit
     {
         public static void MapMovieEndpoints(this IEndpointRouteBuilder app)
         {
@@ -43,7 +43,6 @@ namespace MovieApp.WebApi.Endpoints
           });
 
             app.MapGet("/api/movies/{id}",
-              //[Authorize]
             async (int id, ISender sender) =>
               {
                   return Results.Ok(await sender.Send(new GetMovieDetailsQuery(id)));
